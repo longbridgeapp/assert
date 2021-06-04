@@ -1,6 +1,6 @@
 # Assert
 
-Extends [stretchr/testify/assert](github.com/stretchr/testify/assert) for add more useful methods.
+Extends [stretchr/testify/assert](https://github.com/stretchr/testify/assert) for add more useful methods.
 
 - assert.Equal - asserts values equal, but ignore type.
 - assert.EqualHTML - asserts HTML equal, ignore spaces.
