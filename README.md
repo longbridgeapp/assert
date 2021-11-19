@@ -1,5 +1,7 @@
 # Assert
 
+[![Go](https://github.com/longbridgeapp/assert/actions/workflows/go.yml/badge.svg)](https://github.com/longbridgeapp/assert/actions/workflows/go.yml)
+
 Extends [stretchr/testify/assert](https://github.com/stretchr/testify/tree/master/assert) for add more useful methods.
 
 - assert.Equal - asserts values equal, but ignore type.
