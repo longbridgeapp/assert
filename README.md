@@ -4,8 +4,8 @@
 
 Extends [stretchr/testify/assert](https://github.com/stretchr/testify/tree/master/assert) for add more useful methods.
 
-- assert.Equal - asserts values equal, but ignore type.
-- assert.EqualHTML - asserts HTML equal, ignore spaces.
+- `assert.Equal` - asserts values equal, but ignore type.
+- `assert.EqualHTML` - asserts HTML equal, ignore spaces.
 
 ## Installation
 
@@ -15,7 +15,7 @@ go get github.com/longbridgeapp/assert
 
 ## Usage
 
-```
+```go
 package some_test
 
 import (
