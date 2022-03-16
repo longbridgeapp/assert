@@ -2,7 +2,7 @@
 
 [![Go](https://github.com/longbridgeapp/assert/actions/workflows/go.yml/badge.svg)](https://github.com/longbridgeapp/assert/actions/workflows/go.yml)
 
-> Requirement Go 1.18+, lower Go version please use 0.x
+> 🍯 Requirement Go 1.18+ for Generics, lower Go version please use 0.x
 
 Extends [stretchr/testify/assert](https://github.com/stretchr/testify/tree/master/assert) for add more useful methods.
 
