@@ -25,10 +25,11 @@ type tHelper interface {
 //
 //    assert.StrictEqual(t, 123, int64(123))
 //
-func Equal(t TestingT, expected, actual interface{}, msgAndArgs ...interface{}) bool {
+func Equal[A any, B any](t TestingT, expected A, actual B, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
+
 	return testifyAssert.EqualValues(t, expected, actual, msgAndArgs...)
 }
 
@@ -37,10 +38,11 @@ func Equal(t TestingT, expected, actual interface{}, msgAndArgs ...interface{}) 
 //    assert.StrictEqual(t, 123, 123)
 //    assert.StrictEqual(t, 123, int64(123)) // fail
 //
-func StrictEqual(t TestingT, expected, actual interface{}, msgAndArgs ...interface{}) bool {
+func StrictEqual[A any, B any](t TestingT, expected A, actual B, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
+
 	return testifyAssert.Equal(t, expected, actual, msgAndArgs...)
 }
 
@@ -50,7 +52,7 @@ func StrictEqual(t TestingT, expected, actual interface{}, msgAndArgs ...interfa
 //    assert.NotEqual(t, 12, int32(12)) // fail
 //    assert.NotEqual(t, 12, int32(13)) // ok
 //
-func NotEqual(t TestingT, expected, actual interface{}, msgAndArgs ...interface{}) bool {
+func NotEqual[A any, B any](t TestingT, expected A, actual B, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
@@ -63,7 +65,7 @@ func NotEqual(t TestingT, expected, actual interface{}, msgAndArgs ...interface{
 //
 // Both arguments must be pointer variables. Pointer variable sameness is
 // determined based on the equality of both type and value.
-func Same(t TestingT, expected, actual interface{}, msgAndArgs ...interface{}) bool {
+func Same[A any, B any](t TestingT, expected A, actual B, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
@@ -76,7 +78,7 @@ func Same(t TestingT, expected, actual interface{}, msgAndArgs ...interface{}) b
 //
 // Both arguments must be pointer variables. Pointer variable sameness is
 // determined based on the equality of both type and value.
-func NotSame(t TestingT, expected, actual interface{}, msgAndArgs ...interface{}) bool {
+func NotSame[A any, B any](t TestingT, expected A, actual B, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
@@ -90,7 +92,7 @@ func NotSame(t TestingT, expected, actual interface{}, msgAndArgs ...interface{}
 //    assert.Contains(t, ["Hello", "World"], "World")
 //    assert.Contains(t, {"Hello": "World"}, "Hello")
 //
-func Contains(t TestingT, s, contains interface{}, msgAndArgs ...interface{}) bool {
+func Contains[A any, B any](t TestingT, s A, contains B, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
@@ -104,7 +106,7 @@ func Contains(t TestingT, s, contains interface{}, msgAndArgs ...interface{}) bo
 //    assert.NotContains(t, ["Hello", "World"], "Earth")
 //    assert.NotContains(t, {"Hello": "World"}, "Earth")
 //
-func NotContains(t TestingT, s, contains interface{}, msgAndArgs ...interface{}) bool {
+func NotContains[A any, B any](t TestingT, s A, contains B, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
@@ -117,7 +119,7 @@ func NotContains(t TestingT, s, contains interface{}, msgAndArgs ...interface{})
 //
 // 	 assert.ElementsMatch(t, [1, 3, 2, 3], [1, 3, 3, 2])
 //
-func ElementsMatch(t TestingT, listA, listB interface{}, msgAndArgs ...interface{}) (ok bool) {
+func ElementsMatch[T any](t TestingT, listA, listB T, msgAndArgs ...any) (ok bool) {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
@@ -128,7 +130,7 @@ func ElementsMatch(t TestingT, listA, listB interface{}, msgAndArgs ...interface
 //
 //   assert.Panics(t, func(){ GoCrazy() })
 //
-func Panics(t TestingT, f testifyAssert.PanicTestFunc, msgAndArgs ...interface{}) bool {
+func Panics(t TestingT, f testifyAssert.PanicTestFunc, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
@@ -139,7 +141,7 @@ func Panics(t TestingT, f testifyAssert.PanicTestFunc, msgAndArgs ...interface{}
 //
 //   assert.NotPanics(t, func(){ GoCrazy() })
 //
-func NotPanics(t TestingT, f testifyAssert.PanicTestFunc, msgAndArgs ...interface{}) bool {
+func NotPanics(t TestingT, f testifyAssert.PanicTestFunc, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
@@ -150,7 +152,7 @@ func NotPanics(t TestingT, f testifyAssert.PanicTestFunc, msgAndArgs ...interfac
 //
 //   assert.WithinDuration(t, time.Now(), time.Now(), 10*time.Second)
 //
-func WithinDuration(t TestingT, expected, actual time.Time, delta time.Duration, msgAndArgs ...interface{}) bool {
+func WithinDuration(t TestingT, expected, actual time.Time, delta time.Duration, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
@@ -164,7 +166,7 @@ func WithinDuration(t TestingT, expected, actual time.Time, delta time.Duration,
 //	   assert.Equal(t, expectedObj, actualObj)
 //   }
 //
-func NoError(t TestingT, err error, msgAndArgs ...interface{}) bool {
+func NoError(t TestingT, err error, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
@@ -178,7 +180,7 @@ func NoError(t TestingT, err error, msgAndArgs ...interface{}) bool {
 //	   assert.Equal(t, expectedObj, actualObj)
 //   }
 //
-func Error(t TestingT, err error, msgAndArgs ...interface{}) bool {
+func Error(t TestingT, err error, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
@@ -191,7 +193,7 @@ func Error(t TestingT, err error, msgAndArgs ...interface{}) bool {
 //   actualObj, err := SomeFunction()
 //   assert.EqualError(t, err,  expectedErrorString)
 //
-func EqualError(t TestingT, theError error, errString string, msgAndArgs ...interface{}) bool {
+func EqualError(t TestingT, theError error, errString string, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
@@ -202,7 +204,7 @@ func EqualError(t TestingT, theError error, errString string, msgAndArgs ...inte
 //
 //    assert.True(t, myBool)
 //
-func True(t TestingT, value bool, msgAndArgs ...interface{}) bool {
+func True(t TestingT, value bool, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
@@ -213,7 +215,7 @@ func True(t TestingT, value bool, msgAndArgs ...interface{}) bool {
 //
 //    assert.False(t, myBool)
 //
-func False(t TestingT, value bool, msgAndArgs ...interface{}) bool {
+func False(t TestingT, value bool, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
@@ -224,7 +226,7 @@ func False(t TestingT, value bool, msgAndArgs ...interface{}) bool {
 //
 //    assert.Nil(t, err)
 //
-func Nil(t TestingT, object interface{}, msgAndArgs ...interface{}) bool {
+func Nil(t TestingT, object any, msgAndArgs ...any) bool {
 	if h, ok := t.(tHelper); ok {
 		h.Helper()
 	}
