@@ -232,3 +232,37 @@ func Nil(t TestingT, object any, msgAndArgs ...any) bool {
 	}
 	return testifyAssert.Nil(t, object, msgAndArgs...)
 }
+
+// NotNil asserts that the specified object is not nil.
+//
+//    assert.NotNil(t, "hello")
+//
+func NotNil(t TestingT, object any, msgAndArgs ...any) bool {
+	if h, ok := t.(tHelper); ok {
+		h.Helper()
+	}
+	return testifyAssert.NotNil(t, object, msgAndArgs...)
+}
+
+// Empty asserts that the specified object is empty.  I.e. nil, "", false, 0 or either
+// a slice or a channel with len == 0.
+//
+//    assert.Empty(t, "")
+//
+func Empty(t TestingT, object any, msgAndArgs ...any) bool {
+	if h, ok := t.(tHelper); ok {
+		h.Helper()
+	}
+	return testifyAssert.Empty(t, object, msgAndArgs...)
+}
+
+// Len asserts that the specified object has specific length.
+// Len also fails if the object has a type that len() not accept.
+//
+//    assert.Len(t, mySlice, 3)
+func Len(t TestingT, object any, length int, msgAndArgs ...any) bool {
+	if h, ok := t.(tHelper); ok {
+		h.Helper()
+	}
+	return testifyAssert.Len(t, object, length, msgAndArgs...)
+}

@@ -175,4 +175,40 @@ func Test_AssertNil(t *testing.T) {
 	testAssert(t, false, func(t *testing.T) bool {
 		return Nil(t, []any{"hello"})
 	})
+
+	testAssert(t, true, func(t *testing.T) bool {
+		return NotNil(t, []any{"hello"})
+	})
+
+	testAssert(t, false, func(t *testing.T) bool {
+		return NotNil(t, nil)
+	})
+
+	testAssert(t, true, func(t *testing.T) bool {
+		return Empty(t, nil)
+	})
+
+	testAssert(t, true, func(t *testing.T) bool {
+		return Empty(t, "")
+	})
+
+	testAssert(t, true, func(t *testing.T) bool {
+		return Empty(t, []any{})
+	})
+
+	testAssert(t, false, func(t *testing.T) bool {
+		return Empty(t, []any{"a"})
+	})
+
+	testAssert(t, false, func(t *testing.T) bool {
+		return Empty(t, "1")
+	})
+
+	testAssert(t, true, func(t *testing.T) bool {
+		return Len(t, []any{"a", "b"}, 2)
+	})
+
+	testAssert(t, false, func(t *testing.T) bool {
+		return Len(t, []any{"a", "b"}, 3)
+	})
 }
